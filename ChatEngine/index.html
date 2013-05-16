@@ -27,8 +27,8 @@
             chat.client.sendMessage = function (name, message) {
                 var encodedName = $('<div />').text(name).html();
                 var encodedMsg = $('<div />').text(message).html();
-                $('#contentin').append('<li>' + encodedName +
-                    ':  <br/>' + encodedMsg + '</li>');
+                $('#contentin').append('<li>Id[' + encodedName +
+                    ']:  <br/>' + encodedMsg + '</li>');
             };
 
             $.connection.hub.start()
