@@ -7,20 +7,22 @@
     <script src="/signalr/hubs" type="text/javascript"></script>
     <script type="text/javascript">
 
-        
         $(document).ready(function () {
+            //var name= prompt("name ?");
 
-            //to trigger click() event of send button on pressing Enter key
             $("#data").keyup(function (event) {
                 if (event.keyCode == 13) {
                     $("#send").click();
                 }
             });
 
-            //for Hub API connection
- //if using client code on different server , change src in script tag to "http://localhost:36687/signalr/hubs" and uncomment code below
             //$.connection.hub.url = 'http://localhost:36687/signalr';
 
+            // var myHub = $.connection.myHub;
+
+            // $.connection.hub.error(function () {
+            //    console.log("Error!");
+            // });
             var chat = $.connection.chatConn;
             chat.client.sendMessage = function (name, message) {
                 var encodedName = $('<div />').text(name).html();
@@ -39,7 +41,6 @@
             .fail(function () { alert("Could not connect!"); });
         });
         
-            //for persistent connection
             //var connection = $.connection("/chat");
             
             //connection.received(function (msg) { $("#contentin").append("<li>"+msg+"</li>"); });
@@ -78,8 +79,6 @@
             list-style:none;
             margin:0;
             padding:0;
-            word-wrap:break-word;
-            text-align:left;
         }
         .chatbox #sender #data {
             width:290px;
