@@ -16,6 +16,11 @@
                     $("#send").click();
                 }
             });
+            //end
+           
+            $("#toggle").hide();
+            $("#top").click(function (event) { $("#toggle").slideToggle("slow") });
+           
 
             //for Hub API connection
  //if using client code on different server , change src in script tag to "http://localhost:36687/signalr/hubs" and uncomment code below
@@ -37,7 +42,9 @@
                 });
             })
             .fail(function () { alert("Could not connect!"); });
+            //end
         });
+            
         
             //for persistent connection
             //var connection = $.connection("/chat");
@@ -61,29 +68,45 @@
     <style type="text/css">
         .chatbox {
            width:350px;
-           float:right;
+           float:left;
            margin-right:50px;
+           position:absolute;
+           bottom:0;
+           right:0;
+           border:solid thin gray;
         }
         .chatbox #top {
            background-color:black;
            width:350px;
            color:white;
+           cursor:pointer;
+           border:solid thin gray;
+           border-top-width:2px;
         }
         .chatbox #content {
-            background-color:lightblue;
-            color:gray;
+            background-color:aliceblue;
+            color:black;
             width:350px;
+            height:200px;
+            overflow-y:auto;
+
         }
         .chatbox #content ul {
             list-style:none;
             margin:0;
-            padding:0;
+            padding:10px;
             word-wrap:break-word;
             text-align:left;
+        }
+        .chatbox #sender {
+            border: solid 1px lightgray;
         }
         .chatbox #sender #data {
             width:290px;
             float:left;
+            border:none;
+            outline:none;
+            margin-left:5px;
         }
         .chatbox #sender #send {
             width:50px;
@@ -97,11 +120,13 @@
     
     <div class="chatbox">
         <div id="top">ChatEngine</div>
+        <div id="toggle">
         <div id="content">
             <ul id="contentin"></ul>
         </div>
         <div id="sender">
             <input type="text" id="data" /><button id="send">Send</button>
+        </div>
         </div>
     </div>
 </body>
