@@ -19,31 +19,40 @@
             //end
            
             $("#toggle").hide();
-            $("#top").click(function (event) { $("#toggle").slideToggle("slow") });
+            $("#top").click(function (event) { $("#toggle").slideToggle("fast") });
            
 
             //for Hub API connection
  //if using client code on different server , change src in script tag to "http://localhost:36687/signalr/hubs" and uncomment code below
             //$.connection.hub.url = 'http://localhost:36687/signalr';
-
+            var clientip;
             var chat = $.connection.chatConn;
             chat.client.sendMessage = function (name, message) {
                 var encodedName = $('<div />').text(name).html();
                 var encodedMsg = $('<div />').text(message).html();
-                $('#contentin').append('<li>Id[' + encodedName +
-                    ']:  <br/>' + encodedMsg + '</li>');
+                $('#contentin').append('<li>'+clientip+' : ' + encodedMsg + '</li>');
+            };
+
+            chat.client.ipadd = function (ip) {
+                clientip = ip;
+                
             };
 
             $.connection.hub.start()
             .done(function () {
                 $("#send").click(function () {
+                    if ($("#data").val()!="")
                     chat.server.sendmsg($('#data').val());
                     $('#data').val('').focus();
                 });
+
+               
             })
             .fail(function () { alert("Could not connect!"); });
             //end
         });
+
+       
             
         
             //for persistent connection

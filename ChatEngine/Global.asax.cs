@@ -7,15 +7,19 @@ using System.Web.Security;
 using System.Web.SessionState;
 using Microsoft.AspNet.SignalR;
 
+
 namespace ChatEngine
 {
     public class Global : System.Web.HttpApplication
     {
-
+        static string ip;
         protected void Application_Start(object sender, EventArgs e)
         {
             RouteTable.Routes.MapHubs(new HubConfiguration() { EnableCrossDomain = true });
             //RouteTable.Routes.MapHubs();
+           
+
+           
         }
 
         protected void Session_Start(object sender, EventArgs e)
